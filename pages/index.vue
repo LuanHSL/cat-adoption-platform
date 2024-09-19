@@ -1,10 +1,11 @@
 <script setup>
 import Logo from '~/components/Logo.vue';
 import CatItem from '~/components/CatItem.vue';
-import appColors from './utils/Colors';
+
+const router = useRouter()
 
 const adopt = (id) => {
-  console.log(id)
+  router.push(`/adoption/${id}`)
 }
 
 const cats = ref([
@@ -49,11 +50,11 @@ const cats = ref([
 </script>
 
 <template>
-  <header class="container border-b border-stroke">
+  <header class="max-w-[1216px] mx-auto px-7 pt-7 pb-5 border-b border-stroke">
     <Logo />
     
   </header>
-  <main class="container">
+  <main class="max-w-[1216px] mx-auto px-7 pt-7 pb-5">
     <section class="mb-6">
       <h1 class="text-main font-semibold text-3xl mb-3">Cats Adoption Platform</h1>
       <h2 class="text-secondary">Explore our list of lovable cats looking for their forever homes.</h2>

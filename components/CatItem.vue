@@ -21,7 +21,6 @@ const props = defineProps({
 const emit = defineEmits(['adopt']);
 
 const adopt = () => {
-  // TODO redirect to adopt page
   emit('adopt', props.id);
 }
 </script>
@@ -33,7 +32,7 @@ const adopt = () => {
       :src="image"
     >
     <h3 class="font-semibold text-xl mb-2">{{ title }}</h3>
-    <p class="text-secondary mb-5 text-sm leading-6">{{ description }}</p>
+    <p class="text-secondary mb-5 text-sm leading-6 line-clamp-2">{{ description }}</p>
     <button
       class="bg-main text-white p-3 rounded-lg text-sm"
       @click="adopt"
