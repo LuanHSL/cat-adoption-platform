@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Cat {
+  id          Int        @id @default(autoincrement()) @map("_id")
+  name        String
+  description String
+  image       String
+  adoptions   Adoption[]
+  createdAt   DateTime   @default(now())
+}
+
+model Adoption {
+  id          Int      @id @default(autoincrement()) @map("_id")
+  fullName    String
+  telephone   String
+  observation String
+  cat         Cat      @relation(fields: [catId], references: [id])
+  catId       Int
+  createdAt   DateTime @default(now())
+}

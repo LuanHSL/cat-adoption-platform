@@ -11,10 +11,20 @@ export default defineNuxtConfig({
       ]
     }
   },
+  modules: ['@nuxtjs/supabase'],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      include: ['/admin(/*)?'],
+      exclude: [],
+      cookieRedirect: false,
+    }
+  }
 })

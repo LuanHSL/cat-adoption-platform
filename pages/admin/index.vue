@@ -2,6 +2,7 @@
 import CatCute from '~/components/icon/CatCuteIcon.vue'
 import EditIcon from '~/components/icon/EditIcon.vue'
 import TrashIcon from '~/components/icon/TrashIcon.vue'
+import LogoutIcon from '~/components/icon/LogoutIcon.vue'
 import appColors from '~/utils/Colors'
 
 import ModalDelete from '~/components/modal/ModalDelete.vue'
@@ -9,6 +10,8 @@ import ModalDelete from '~/components/modal/ModalDelete.vue'
 useHead({
   title: 'Admin - Cat Adoption Platform',
 })
+
+const supabase  = useSupabaseClient()
 
 const router = useRouter()
 
@@ -80,6 +83,16 @@ const deleteItem = (id) => {
 const goToNewCat = () => {
   router.push('/admin/new-cat')
 }
+
+const goToHome = () => {
+  router.push('/')
+}
+
+const signOut = async () => {
+  await supabase.auth.signOut()
+
+  goToHome()
+}
 </script>
 
 <template>
@@ -91,14 +104,14 @@ const goToNewCat = () => {
   />
 
   <div class="flex h-screen">
-    <section class="w-full max-w-[292px] border border-stroke">
+    <section class="flex flex-col justify-between w-full max-w-[292px] border border-stroke">
       <div class="p-4">
         <Logo
           icon-size="3em"
           text-size="text-lg"
         />
       </div>
-      <div class="px-4 pb-4 pt-8 border-t border-stroke">
+      <div class="px-4 pb-4 pt-8 border-t border-stroke flex-grow">
         <h2 class="uppercase text-placeholder text-sm">Main Menu</h2>
 
         <ul class="mt-5">
@@ -109,6 +122,21 @@ const goToNewCat = () => {
             <span>Cat List</span>
           </li>
         </ul>
+      </div>
+
+      <div class="p-4">
+        <button
+          class="flex space-x-2 items-center bg-danger/10 p-2 w-fit rounded-lg cursor-pointer hover:bg-danger/30"
+          @click="signOut"
+        >
+          <LogoutIcon
+            size="2em"
+            :color="appColors.danger"
+          />
+          <span class="font-semibold text-danger">
+            Logout
+          </span>
+        </button>
       </div>
     </section>
     <section class="p-8 w-full bg-stroke/20">
