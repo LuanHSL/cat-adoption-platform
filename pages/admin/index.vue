@@ -4,6 +4,12 @@ import EditIcon from '~/components/icon/EditIcon.vue'
 import TrashIcon from '~/components/icon/TrashIcon.vue'
 import appColors from '~/utils/Colors'
 
+import ModalDelete from '~/components/modal/ModalDelete.vue'
+
+const isModalDeleteOpen = ref(false)
+
+const catSelected = ref(null)
+
 const cats = ref([
 {
     id: 1,
@@ -42,9 +48,38 @@ const cats = ref([
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
   }
 ])
+
+const selectCat = (id) => {
+  catSelected.value = id
+}
+
+const closeModalDelete = () => {
+  isModalDeleteOpen.value = false
+}
+
+const openModalDelete = (id) => {
+  selectCat(id)
+  isModalDeleteOpen.value = true
+}
+
+const deleteItem = (id) => {
+  const index = cats.value.findIndex(item => item.id === id);
+
+  if (index !== -1) {
+    cats.value.splice(index, 1);
+    closeModalDelete()
+  }
+}
 </script>
 
 <template>
+  <ModalDelete
+    v-if="isModalDeleteOpen"
+    :id="catSelected"
+    @close="closeModalDelete"
+    @delete="deleteItem"
+  />
+
   <div class="flex h-screen">
     <section class="w-full max-w-[292px] border border-stroke">
       <div class="p-4">
@@ -94,7 +129,7 @@ const cats = ref([
             <div class="col-span-4 text-main text-sm font-semibold">Description</div>
             <div class="col-span-2 text-main text-sm font-semibold text-end">Actions</div>
           </div>
-          
+
           <div
             v-for="cat in cats"
             :key="`cat_${cat.id}`"
@@ -124,6 +159,7 @@ const cats = ref([
                 <TrashIcon
                   size="1.2em"
                   :color="appColors.danger"
+                  @click="openModalDelete(cat.id)"
                 />
               </button>
             </div>
