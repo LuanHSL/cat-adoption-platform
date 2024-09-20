@@ -19,6 +19,10 @@ const props = defineProps({
   required: {
     type: Boolean,
     default: false
+  },
+  rows: {
+    type: Number,
+    default: 4
   }
 })
 
@@ -42,6 +46,7 @@ const updateValue = (event) => {
       :placeholder="placeholder"
       :value="value"
       :required="required"
+      :rows="rows"
       @input="updateValue"
     ></textarea>
   </div>

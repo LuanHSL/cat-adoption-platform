@@ -3,6 +3,7 @@ import CloseIcon from '~/components/icon/CloseIcon.vue';
 import appColors from '~/utils/Colors';
 import Input from '~/components/Input.vue';
 import Textarea from '~/components/Textarea.vue';
+import ModalSuccess from '~/components/modal/ModalSuccess.vue';
 
 const adoptionForm = ref({
   fullName: '',
@@ -11,6 +12,8 @@ const adoptionForm = ref({
   observation: '',
   isAgree: false
 })
+
+const isModalOpen = ref(false)
 
 const router = useRouter()
 const route = useRoute()
@@ -21,12 +24,21 @@ const goToCatList = () => {
 
 const submit = () => {
   console.log(adoptionForm.value, parseInt(route.params.id, 10))
+  openModal()
+}
+
+const closeModal = () => {
+  isModalOpen.value = false
+  goToCatList()
+}
+
+const openModal = () => {
+  isModalOpen.value = true
 }
 </script>
 
 <template>
-  <!-- Gato id {{ $route.params.id }} -->
-  <header class="max-w-[455px] mx-auto flex justify-between items-center px-7 pt-7 pb-5 border-b border-stroke">
+  <header class="max-w-[455px] mx-auto flex justify-between items-center px-7 pt-7 pb-5">
     <h1 class="text-2xl font-semibold">Adoption Form</h1>
     <CloseIcon
       size="1.7em"
@@ -35,6 +47,8 @@ const submit = () => {
       @click="goToCatList"
     />
   </header>
+
+  <Divider class="max-w-[455px] mx-auto px-7" />
 
   <main class="max-w-[455px] mx-auto px-7 pt-7 pb-5">
     <form
@@ -102,4 +116,9 @@ const submit = () => {
       </div>
     </form>
   </main>
+
+  <ModalSuccess
+    v-if="isModalOpen"
+    @close="closeModal"
+  />
 </template>

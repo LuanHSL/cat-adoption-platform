@@ -1,6 +1,7 @@
 <script setup>
 import Logo from '~/components/Logo.vue';
 import CatItem from '~/components/CatItem.vue';
+import Divider from '~/components/Divider.vue';
 
 const router = useRouter()
 
@@ -50,10 +51,12 @@ const cats = ref([
 </script>
 
 <template>
-  <header class="max-w-[1216px] mx-auto px-7 pt-7 pb-5 border-b border-stroke">
+  <header class="max-w-[1216px] mx-auto px-7 pt-7 pb-5">
     <Logo />
-    
   </header>
+
+  <Divider class="max-w-[1216px] mx-auto px-7" />
+
   <main class="max-w-[1216px] mx-auto px-7 pt-7 pb-5">
     <section class="mb-6">
       <h1 class="text-main font-semibold text-3xl mb-3">Cats Adoption Platform</h1>
