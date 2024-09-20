@@ -5,6 +5,10 @@ import Input from '~/components/Input.vue';
 import Textarea from '~/components/Textarea.vue';
 import ModalSuccess from '~/components/modal/ModalSuccess.vue';
 
+useHead({
+  title: 'Form - Cat Adoption Platform',
+})
+
 const adoptionForm = ref({
   fullName: '',
   email: '',

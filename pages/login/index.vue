@@ -1,6 +1,10 @@
 <script setup>
 import Cat from '~/assets/image/cat.png'
 
+useHead({
+  title: 'Login - Cat Adoption Platform',
+})
+
 const credentials = ref({
   username: '',
   password: ''
