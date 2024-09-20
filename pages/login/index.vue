@@ -5,13 +5,20 @@ useHead({
   title: 'Login - Cat Adoption Platform',
 })
 
+const router = useRouter()
+
 const credentials = ref({
   username: '',
   password: ''
 })
 
+const goToAdmin = () => {
+  router.push('/admin')
+}
+
 const login = () => {
   console.log(credentials.value)
+  goToAdmin()
 }
 </script>
 
