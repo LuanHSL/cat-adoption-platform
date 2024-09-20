@@ -1,6 +1,6 @@
 <script setup>
-import EyeIcon from './icon/EyeIcon.vue';
-import EyeOffIcon from './icon/EyeOffIcon.vue';
+import EyeIcon from '~/components/icon/EyeIcon.vue';
+import EyeOffIcon from '~/components/icon/EyeOffIcon.vue';
 import appColors from '~/utils/Colors';
 
 const props = defineProps({
@@ -81,12 +81,3 @@ const hiddenPassword = () => {
     </div>
   </div>
 </template>
-
-<style>
-.icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>

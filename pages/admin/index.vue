@@ -6,6 +6,12 @@ import appColors from '~/utils/Colors'
 
 import ModalDelete from '~/components/modal/ModalDelete.vue'
 
+useHead({
+  title: 'Admin - Cat Adoption Platform',
+})
+
+const router = useRouter()
+
 const isModalDeleteOpen = ref(false)
 
 const catSelected = ref(null)
@@ -70,6 +76,10 @@ const deleteItem = (id) => {
     closeModalDelete()
   }
 }
+
+const goToNewCat = () => {
+  router.push('/admin/new-cat')
+}
 </script>
 
 <template>
@@ -115,9 +125,9 @@ const deleteItem = (id) => {
 
         <button
           class="bg-main text-white py-3 px-5 h-10 rounded-lg text-sm leading-none"
-          @click="() => {}"
+          @click="goToNewCat"
         >
-          New Chat
+          New Cat
         </button>
       </header>
 

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Cat Adoption Platform',
       link: [
-        { rel: 'icon', href: 'favicon.svg' }
+        { rel: 'icon', href: '../favicon.svg' }
       ]
     }
   },
