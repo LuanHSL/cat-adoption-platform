@@ -1,4 +1,8 @@
 <script setup>
+import EyeIcon from './icon/EyeIcon.vue';
+import EyeOffIcon from './icon/EyeOffIcon.vue';
+import appColors from '~/utils/Colors';
+
 const props = defineProps({
   modelValue: {
     type: String,
@@ -26,10 +30,20 @@ const props = defineProps({
   }
 })
 
+const isVisible = ref(false)
+
 const emit = defineEmits(['update:modelValue'])
 
 const updateValue = (event) => {
   emit('update:modelValue', event.target.value)
+}
+
+const showPassword = () => {
+  isVisible.value = true
+}
+
+const hiddenPassword = () => {
+  isVisible.value = false
 }
 </script>
 
@@ -41,13 +55,38 @@ const updateValue = (event) => {
     >
       {{ title }}
     </p>
-    <input
-      class="border border-stroke w-full px-5 py-3 rounded-lg"
-      :type="type"
-      :placeholder="placeholder"
-      :value="value"
-      :required="required"
-      @input="updateValue"
-    >
+    <div class="relative">
+      <input
+        class="border border-stroke w-full px-5 py-3 rounded-lg"
+        :type="isVisible ? 'text' : type"
+        :placeholder="placeholder"
+        :value="value"
+        :required="required"
+        @input="updateValue"
+      >
+      <EyeIcon
+        v-if="type === 'password' && !isVisible"
+        size="1.4em"
+        :color="appColors.placeholder"
+        class="absolute right-4 top-1/2 -translate-y-1/2"
+        @click="showPassword"
+      />
+      <EyeOffIcon
+        v-if="type === 'password' && isVisible"
+        size="1.4em"
+        :color="appColors.placeholder"
+        class="absolute right-4 top-1/2 -translate-y-1/2"
+        @click="hiddenPassword"
+      />
+    </div>
   </div>
 </template>
+
+<style>
+.icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+</style>

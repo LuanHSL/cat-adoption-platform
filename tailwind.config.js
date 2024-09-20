@@ -12,7 +12,11 @@ export default {
   ],
   theme: {
     colors: appColors,
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-pattern': "url('~/assets/image/background.png')",
+      }
+    },
   },
   plugins: [],
 }
