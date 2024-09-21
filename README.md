@@ -73,3 +73,11 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+
+USER: admin@admin.com
+PASSWORD: password123
+
+npx prisma db push
+
+npx prisma generate
