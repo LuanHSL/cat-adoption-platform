@@ -3,10 +3,13 @@ import CloseIcon from '~/components/icon/CloseIcon.vue';
 import appColors from '~/utils/Colors';
 import Input from '~/components/Input.vue';
 import Textarea from '~/components/Textarea.vue';
+import { catSchema } from '~/schemas/cat'
 
 useHead({
   title: 'Form - Cat Adoption Platform',
 })
+
+const catStore = useCatStore()
 
 const imageSelected = ref('')
 const imageCreated = ref(null)
@@ -28,10 +31,16 @@ const selectFile = (file) => {
   imageCreated.value = URL.createObjectURL(file)
 }
 
-const submit = () => {
-  console.log(cat.value, imageSelected.value)
+const submit = async () => {
+  try {
+    const catParse = catSchema.parse({ ...cat.value, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1IwK6-SxM83UpFVY6WtUZxXx-phss_gAUfdKbkTfau6VWVkt'});
+  
+    await catStore.addCat(catParse)
 
-  goToAdmin()
+    goToAdmin()
+  } catch (error) {
+    console.error(error);
+  }
 }
 </script>
 

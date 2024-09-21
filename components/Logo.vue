@@ -1,6 +1,6 @@
 <script setup>
 import CatIcon from '~/components/icon/CatIcon.vue';
-import appColors from './utils/Colors';
+import appColors from '~/utils/Colors';
 
 const props = defineProps({
   iconSize: {

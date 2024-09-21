@@ -6,7 +6,7 @@ useHead({
   title: 'Login - Cat Adoption Platform',
 })
 
-const supabase  = useSupabaseClient()
+const authStore = useAuthStore()
 
 const router = useRouter()
 
@@ -21,19 +21,10 @@ const goToAdmin = () => {
 
 const signIn = async () => {
   try {
-    const userParse = userSchema.parse({
-      email: credentials.value.email,
-      password: credentials.value.password,
-    });
+    const userParse = userSchema.parse(credentials.value);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: userParse.email,
-      password: userParse.password
-    });
+    await authStore.signIn(userParse)
 
-    if (error) {
-      throw error;
-    }
     goToAdmin() 
   } catch (error) {
     console.error(error);

@@ -9,6 +9,8 @@ useHead({
   title: 'Form - Cat Adoption Platform',
 })
 
+const adoptionStore = useAdoptionStore()
+
 const adoptionForm = ref({
   fullName: '',
   email: '',
@@ -26,9 +28,16 @@ const goToCatList = () => {
   router.push('/')
 }
 
-const submit = () => {
-  console.log(adoptionForm.value, parseInt(route.params.id, 10))
-  openModal()
+const submit = async () => {
+  try {    
+    await adoptionStore.addAdoption({
+      ...adoptionForm.value,
+      catId: parseInt(route.params.id, 10)
+    })
+    openModal()
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const closeModal = () => {
@@ -58,6 +67,7 @@ const openModal = () => {
     <form
       class="flex flex-col space-y-7"
       @submit.prevent="submit"
+      @keypress.enter.prevent="submit"
     >
       <Input
         v-model="adoptionForm.fullName"

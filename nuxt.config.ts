@@ -11,7 +11,20 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['@nuxtjs/supabase'],
+  modules: [
+    '@nuxtjs/supabase',
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: ['defineStore', 'acceptHMRUpdate'],
+      }
+    ]
+  ],
+  imports: {
+    dirs: [
+      'stores'
+    ],
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
